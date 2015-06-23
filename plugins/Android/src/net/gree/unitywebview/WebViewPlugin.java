@@ -37,7 +37,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
-import android.webkit.JavascriptInterface;
+//import android.webkit.JavascriptInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.graphics.Color;
@@ -51,7 +51,7 @@ class WebViewPluginInterface
 		mGameObject = gameObject;
 	}
 
-	@JavascriptInterface
+	//@JavascriptInterface
 	public void call(String message)
 	{
 		UnityPlayer.UnitySendMessage(mGameObject, "CallFromJS", message);
@@ -117,10 +117,12 @@ public class WebViewPlugin
 			WebSettings webSettings = mWebView.getSettings();
 			webSettings.setSupportZoom(false);
 			webSettings.setJavaScriptEnabled(true);
+			/*
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 				Log.i("WebViewPlugin", "Build.VERSION.SDK_INT = " + Build.VERSION.SDK_INT);
 				webSettings.setAllowUniversalAccessFromFileURLs(true);
 			}
+			*/
 			webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 			webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
