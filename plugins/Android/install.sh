@@ -2,7 +2,7 @@
 UNITYLIBS="/Applications/Unity/Unity.app/Contents/PlaybackEngines/AndroidPlayer/release/bin/classes.jar"
 DSTDIR="../../build/Packager/Assets/Plugins/Android"
 export ANT_OPTS=-Dfile.encoding=UTF8
-android update project -t 1 -p .
+android update project -t 2 -p .
 mkdir -p libs
 cp $UNITYLIBS libs
 ant release
