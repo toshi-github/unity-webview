@@ -94,7 +94,7 @@ public class WebViewPlugin
 
 			mWebView.setWebChromeClient(new WebChromeClient() {
 				public boolean onConsoleMessage(android.webkit.ConsoleMessage cm) {
-					Log.d("Webview", cm.message());
+				    //					Log.d("Webview", cm.message());
 					return true;
 				}
 			});
@@ -118,7 +118,7 @@ public class WebViewPlugin
 			webSettings.setSupportZoom(false);
 			webSettings.setJavaScriptEnabled(true);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				Log.i("WebViewPlugin", "Build.VERSION.SDK_INT = " + Build.VERSION.SDK_INT);
+			    //				Log.i("WebViewPlugin", "Build.VERSION.SDK_INT = " + Build.VERSION.SDK_INT);
 				webSettings.setAllowUniversalAccessFromFileURLs(true);
 			}
 			webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
