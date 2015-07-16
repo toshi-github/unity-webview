@@ -41,6 +41,8 @@ import android.webkit.JavascriptInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.graphics.Color;
+import android.webkit.SslErrorHandler;
+import android.net.http.SslError;
 
 class WebViewPluginInterface
 {
@@ -63,7 +65,7 @@ public class WebViewPlugin
 	private static FrameLayout layout = null;
 	private WebView mWebView;
 	private long mDownTime;
-
+    
 	public WebViewPlugin()
 	{
 	}
@@ -109,6 +111,16 @@ public class WebViewPlugin
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 					view.getContext().startActivity(intent);
 					return true;
+				}
+
+				@Override
+				public void onReceivedError(WebView view, int errorCode, String description, String failingURL) {
+				    UnityPlayer.UnitySendMessage(gameObject, "CallOnReceivedError", description);
+				}
+
+				@Override
+				public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+				    UnityPlayer.UnitySendMessage(gameObject, "CallOnReceivedSslError", null);
 				}
 			});
 			mWebView.addJavascriptInterface(
