@@ -75,7 +75,8 @@ public class WebViewPlugin
 		final Activity a = UnityPlayer.currentActivity;
 		a.runOnUiThread(new Runnable() {public void run() {
 
-			mWebView = new WebView(a);
+		    //		    Log.d("WebView", "Start Init");
+		        mWebView = new WebView(a);
 			mWebView.setVisibility(View.GONE);
 			mWebView.setFocusable(true);
 			mWebView.setFocusableInTouchMode(true);
@@ -100,6 +101,7 @@ public class WebViewPlugin
 					return true;
 				}
 			});
+			//		    Log.d("WebView", "Init before setWebViewClient");
 			mWebView.setWebViewClient(new WebViewClient() {
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -112,7 +114,6 @@ public class WebViewPlugin
 					view.getContext().startActivity(intent);
 					return true;
 				}
-
 				@Override
 				public void onReceivedError(WebView view, int errorCode, String description, String failingURL) {
 				    UnityPlayer.UnitySendMessage(gameObject, "CallOnReceivedError", description);
@@ -123,6 +124,7 @@ public class WebViewPlugin
 				    UnityPlayer.UnitySendMessage(gameObject, "CallOnReceivedSslError", null);
 				}
 			});
+			//		    Log.d("WebView", "Init after setWebViewClient");
 			mWebView.addJavascriptInterface(
 				new WebViewPluginInterface(gameObject), "Unity");
 
@@ -141,6 +143,7 @@ public class WebViewPlugin
 	        webSettings.setDomStorageEnabled(true);
 			webSettings.setDatabasePath(databasePath); 
 
+			//		    Log.d("WebView", "leave setWebViewClient");
 		}});
 
 		final View activityRootView = a.getWindow().getDecorView().getRootView();
@@ -181,7 +184,9 @@ public class WebViewPlugin
 		final Activity a = UnityPlayer.currentActivity;
 		a.runOnUiThread(new Runnable() {public void run() {
 
+		    //		    Log.d("WebView", "before LoadURL: " + url);
 			mWebView.loadUrl(url);
+			//		    Log.d("WebView", "after LoadURL: " + url);
 
 		}});
 	}
@@ -191,7 +196,9 @@ public class WebViewPlugin
 		final Activity a = UnityPlayer.currentActivity;
 		a.runOnUiThread(new Runnable() {public void run() {
 
+		    //		    Log.d("WebView", "before EvaluateJS: " + js);
 			mWebView.loadUrl("javascript:" + js);
+			//		    Log.d("WebView", "after EvaluateJS: " + js);
 
 		}});
 	}
@@ -206,7 +213,9 @@ public class WebViewPlugin
 		Activity a = UnityPlayer.currentActivity;
 		a.runOnUiThread(new Runnable() {public void run() {
 
+		    //		    Log.d("WebView", "before setLayoutParams");
 			mWebView.setLayoutParams(params);
+			//		    Log.d("WebView", "after setLayoutParams");
 
 		}});
 	}
@@ -217,11 +226,15 @@ public class WebViewPlugin
 		a.runOnUiThread(new Runnable() {public void run() {
 
 			if (visibility) {
+			    //			    Log.d("WebView", "before setVisibility true");
 				mWebView.setVisibility(View.VISIBLE);
 				layout.requestFocus();
 				mWebView.requestFocus();
+				//			    Log.d("WebView", "after setVisibility true");
 			} else {
+			    //			    Log.d("WebView", "before setVisibility false");
 				mWebView.setVisibility(View.GONE);
+				//			    Log.d("WebView", "after setVisibility false");
 			}
 
 		}});
